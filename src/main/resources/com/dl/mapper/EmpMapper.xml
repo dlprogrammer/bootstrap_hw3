@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.dl.dao.EmpDAO">
+    <resultMap id="rmEmp" type="emp">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="salary" property="salary"/>
+        <result column="age" property="age"/>
+        <association property="dept" javaType="Dept">
+            <id column="did" property="id"/>
+            <result column="dname" property="name"/>
+        </association>
+    </resultMap>
+    <select id="selectAll" resultMap="rmEmp">
+select e.id id,e.name name,e.salary salary,e.age age,e.dept_id did,d.name dname from emp e left join dept d on e.dept_id = d.id    </select>
+    <select id="select" parameterType="emp" resultMap="rmEmp">
+       select e.id id,e.name name,e.salary salary,e.age age,e.dept_id did,d.name dname from emp e left join dept d on e.dept_id = d.id where id = #{id}
+    </select>
+    <insert id="insert" parameterType="emp">
+        insert into emp values (#{id},#{name},#{salary},#{age},#{dept.id})
+    </insert>
+    <update id="update" parameterType="emp">
+        update emp set name=#{name},sex=#{salary},age=#{age},dept_id=#{dept.id} where id=#{id}
+    </update>
+    <delete id="delete" parameterType="emp">
+        delete from emp where id = #{id}
+    </delete>
+</mapper>

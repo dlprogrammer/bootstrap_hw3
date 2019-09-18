@@ -1,0 +1,15 @@
+server:
+  port: 8989
+  jsp-servlet:
+    init-parameters:
+      development: true
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://localhost:3306/bootstrap_hw3
+    username: root
+    password: root
+mybatis:
+  mapper-locations: classpath:com/dl/mapper/*.xml
+  type-aliases-package: com.dl.entity
+
